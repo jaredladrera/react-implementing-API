@@ -9,7 +9,18 @@ class App extends Component {
   state = {
     accounts: [],
     company: [],
-    count: 1
+    theData: [{
+      account: {
+        AccountTypeID: '',
+        CompanyID: 1,
+        EmailAddress: ''
+      },
+      activity: {
+        AccountID: '',
+        Action: ''
+      }
+    }],
+    count: 0
   }
 
   componentWillMount(){
@@ -26,24 +37,20 @@ class App extends Component {
       })
    
     })
+
+    axios.get()
   }
 
   edit = () => {
-
   }
 
   counting = (e) => {
 
-    this.setState({
-      count: e.target.value + 1
-    })
-
-    console.log(this.state.count);
+    this.state.count++;
   }
 
   render() {
     let accounts = this.state.accounts.map((account) => {
-
       return (
         <tr key={account.id}>
           <td>{account.brandName}</td>
@@ -71,7 +78,7 @@ class App extends Component {
     return (
       <div className="App container">
         <h4>{this.state.count}</h4>
-        <button className="btn btn-success" onChange={this.counting}>Counting</button>
+        <button className="btn btn-success" onClick={this.counting}>Counting</button>
         <button type="button" className="btn btn-primary modalBtn" data-toggle="modal" data-target="#myModal">
             Open modal
           </button>
@@ -96,14 +103,16 @@ class App extends Component {
                         <label>Company Name</label>
                     <select className="form-control" id="companyName" placeholder="Company Name">
                         {companyDetails}
+                        <option></option>
                     </select  >
                     </div>
                     <div className="form-group">
                     <label>Access Type</label>
-                    <select className="form-control" id="accessType" placeholder="Access type">
-                            <option>1</option>
-                            <option>2</option>
-                    </select>
+                    <select class="form-control drop" id="newUserAccessType">
+                      <option value='1'>Master Developer</option>
+                      <option value='2'>Developer</option>
+                      <option value='3'>Master Administrator</option>
+                  </select>
                     </div>
                 </div>
 
